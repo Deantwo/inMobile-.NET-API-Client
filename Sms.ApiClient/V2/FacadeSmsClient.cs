@@ -44,8 +44,20 @@ namespace Sms.ApiClient.V2
 			return _statusClient.GetMessageStatus();
 		}
 
+		public SendMessagesResponse SendMessages(ISmsMessage message, string messageStatusCallbackUrl = null)
+		{
+			if (message is null)
+				throw new ArgumentNullException(nameof(message));
+
+			return _sendClient.SendMessages(messages: new List<ISmsMessage>() {message}, messageStatusCallbackUrl: messageStatusCallbackUrl);
+		}
 		public SendMessagesResponse SendMessages(List<ISmsMessage> messages, string messageStatusCallbackUrl = null)
 		{
+			if (messages is null)
+				throw new ArgumentNullException(nameof(messages));
+			if (messages.Count == 0)
+				throw new ArgumentException($"{nameof(messages)} cannot be empty.", nameof(messages));
+
 			return _sendClient.SendMessages(messages: messages, messageStatusCallbackUrl: messageStatusCallbackUrl);
 		}
 
