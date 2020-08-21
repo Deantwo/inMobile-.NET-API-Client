@@ -11,7 +11,22 @@ namespace Sms.ApiClient.V2.SendMessages
         {
         }
         /// <summary>
-        /// Constructor with all required parameters set, and optional parameters set with a default value.
+        /// Constructor with all required parameters.
+        /// </summary>
+        /// <param name="msisdn">The phone number to send to, including country code, e.g. 4512345678</param>
+        /// <param name="text">The text message in the SMS.</param>
+        /// <param name="senderName">The sendername, keep this between 3 and 11 chars.</param>
+        /// <param name="encoding">The encoding to use.</param>
+        public SmsMessage(string msisdn, string text, string senderName, SmsEncoding encoding)
+        {
+            MessageId = messageId ?? "";
+            Msisdn = msisdn;
+            Text = text;
+            SenderName = senderName;
+            Encoding = encoding;
+        }
+        /// <summary>
+        /// Constructor with all required parameters, and optional parameters with a default value.
         /// </summary>
         /// <param name="msisdn">The phone number to send to, including country code, e.g. 4512345678</param>
         /// <param name="text">The text message in the SMS.</param>
